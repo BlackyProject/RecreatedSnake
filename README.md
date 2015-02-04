@@ -8,15 +8,15 @@ In the second variant, a sole player attempts to eat objects by running into the
 - http://en.wikipedia.org/wiki/Snake_(video_game)#Gameplay
 
 # Controls  
-W - Changes direction to North.
-A - Changes direction to West.
-S - Changes direction to South.
-D -  Changes direction to East.
+- W - Changes direction to North.
+- A - Changes direction to West.
+- S - Changes direction to South.
+- D -  Changes direction to East.
 
-P - Pause.
-O - Changes FPS.
-I - Toggle Debug Informations (May cause slowdowns).
-Space - Toggle Skip mode True or False.
+- P - Pause.
+- O - Changes FPS.
+- I - Toggle Debug Informations (May cause slowdowns).
+- Space - Toggle Skip mode True or False.
 
 # Modes
 If the Skip mode is on False you can queue up Input, which will be executed in the next available frame.
