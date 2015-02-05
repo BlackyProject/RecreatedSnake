@@ -25,6 +25,8 @@ On Skip mode True you can not queue any Input, after each frame the Inputstream 
 # ToDo
 - Change Draw Function.
 - More Room Layouts.
+- Save Mode.
+- Scoreboard.
 
 # Known Issues
 - Sometimes Food-Points can Spawn on top the Snake.
