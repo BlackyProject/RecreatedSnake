@@ -23,7 +23,6 @@ If the Skip mode is on False you can queue up Input, which will be executed in t
 On Skip mode True you can not queue any Input, after each frame the Inputstream will be cleared (May also cause slowdowns).
 
 # ToDo
-- Change Draw Function.
 - More Room Layouts.
 - Save Mode.
 - Scoreboard.
