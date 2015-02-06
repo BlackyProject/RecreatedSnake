@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Xml;
 /*
  * Creator: SakuraJassen
- * Version: V1.1
+ * Version: V1.2
  */
 
 namespace Sneak_2._0
@@ -125,8 +125,8 @@ namespace Sneak_2._0
       Console.CursorVisible = false;
       Console.SetWindowSize(80, 80);
       ReadOption();
+      vFPS = Convert.ToString(1000 / vWait);
       vGameTime.Start();
-      ChangeFPS();
     }
 
     static void ReadOption()
@@ -172,6 +172,9 @@ namespace Sneak_2._0
             case "vMode":
               vMode = Convert.ToBoolean(vValue[1]);
               break;
+            case "vWait":
+              vWait = Convert.ToInt32(vValue[1]);
+              break;
             default:
               break;
           }
@@ -185,9 +188,9 @@ namespace Sneak_2._0
     }
     static void CreateOptions()
     {
-        string[]     Options         = new string[6]{ "SCORE", "MAXY", "MAXX", "MINY", "MINX", "vMode" };
+        string[]     Options         = new string[7]{ "SCORE", "MAXY", "MAXX", "MINY", "MINX", "vWait", "vMode" };
 
-        int[]        OptionValueInt  = new int[5]{ SCORE, MAXY, MAXX, MINY, MINX };
+        int[]        OptionValueInt  = new int[6]{ SCORE, MAXY, MAXX, MINY, MINX, vWait };
         Boolean[]    OptionValueBool = new Boolean[1]{ vMode };
 
         List<string> lValues = new List<string>();
@@ -366,6 +369,7 @@ namespace Sneak_2._0
           break;
         case 'o':
           ChangeFPS();
+          CreateOptions();
           break;
         case 'i':
           vDebug = !vDebug;
@@ -455,10 +459,6 @@ namespace Sneak_2._0
                           + vGameTime.ElapsedMilliseconds 
                           + " - " 
                           + vDeltaTime);
-      }
-      if (CoolDown < 1)
-      {
-        ChangeFPS("Error! The Sleep timer can't be negativ! Please reenter the FPS!");
       }
       try
       {
