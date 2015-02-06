@@ -18,6 +18,11 @@ In the second variant, a sole player attempts to eat objects by running into the
 - I - Toggle Debug Informations (May cause slowdowns).
 - Space - Toggle Skip mode True or False.
 
+#Download
+I still didn't set up mit Git...
+But you can still download it here! 
+http://www.mediafire.com/download/xnkgqymyjbf9jj2/RecreatedSnake.zip
+
 # Modes
 If the Skip mode is on False you can queue up Input, which will be executed in the next available frame.
 On Skip mode True you can not queue any Input, after each frame the Inputstream will be cleared (May also cause slowdowns).
