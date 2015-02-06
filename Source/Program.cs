@@ -5,9 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 /*
  * Creator: SakuraJassen
- * Version: V1.0
+ * Version: V1.1
  */
 
 namespace Sneak_2._0
@@ -34,13 +35,20 @@ namespace Sneak_2._0
       Y = y;
     }
   }
+
   class Program
   {
-    const int SCORE = 1;
-    const int MAXY = 42;
-    const int MAXX = 41;
-    const int MINY = 1;
-    const int MINX = 0;
+    const int Default_SCORE = 1;
+    const int Default_MAXY = 42;
+    const int Default_MAXX = 41;
+    const int Default_MINY = 1;
+    const int Default_MINX = 0;
+
+    static int SCORE = Default_SCORE;
+    static int MAXY = Default_MAXY;
+    static int MAXX = Default_MAXX;
+    static int MINY = Default_MINY;
+    static int MINX = Default_MINX;
 
     static List<Snake> lSnake = new List<Snake>();
 
@@ -116,8 +124,102 @@ namespace Sneak_2._0
     {
       Console.CursorVisible = false;
       Console.SetWindowSize(80, 80);
+      ReadOption();
       vGameTime.Start();
       ChangeFPS();
+    }
+
+    static void ReadOption()
+    {
+      if (System.IO.File.Exists(@".\Options.xml"))
+      {
+        System.Xml.XmlTextReader reader = new System.Xml.XmlTextReader(@".\Options.xml");
+
+        string vContents = "";
+        while (reader.Read())
+        {
+          reader.MoveToContent();
+          if (reader.NodeType == System.Xml.XmlNodeType.Element && reader.Name != "Options" && reader.Name != "Value")
+          {
+            vContents += reader.Name + ":";
+          }
+          if (reader.NodeType == System.Xml.XmlNodeType.Text)
+          {
+            vContents += reader.Value + "-";
+          }
+        }
+        string[] vBuffer = vContents.Split('-');
+        for (int i = 0; i < 6; i++)
+        {
+          string[] vValue = vBuffer[i].Split(':');
+          switch (vValue[0])
+          {
+            case "SCORE":
+              SCORE = Convert.ToInt32(vValue[1]);
+              break;
+            case "MAXX":
+              MAXX = Convert.ToInt32(vValue[1]);
+              break;
+            case "MAXY":
+              MAXY = Convert.ToInt32(vValue[1]);
+              break;
+            case "MINX":
+              MINX = Convert.ToInt32(vValue[1]);
+              break;
+            case "MINY":
+              MINY = Convert.ToInt32(vValue[1]);
+              break;
+            case "vMode":
+              vMode = Convert.ToBoolean(vValue[1]);
+              break;
+            default:
+              break;
+          }
+        }
+        reader.Close();
+      }
+      else
+      {
+        CreateOptions();
+      }
+    }
+    static void CreateOptions()
+    {
+        string[]     Options         = new string[6]{ "SCORE", "MAXY", "MAXX", "MINY", "MINX", "vMode" };
+
+        int[]        OptionValueInt  = new int[5]{ SCORE, MAXY, MAXX, MINY, MINX };
+        Boolean[]    OptionValueBool = new Boolean[1]{ vMode };
+
+        List<string> lValues = new List<string>();
+
+        for (int i = 0; i < OptionValueInt.Length; i++)
+        {
+          lValues.Add(OptionValueInt[i].ToString());
+        }
+        for (int i = 0; i < OptionValueBool.Length; i++)
+        {
+          lValues.Add(OptionValueBool[i].ToString());
+        }
+
+        using (XmlWriter writer = XmlWriter.Create(@".\Options.xml"))
+        {
+          writer.WriteStartDocument();
+          writer.WriteStartElement("Options");
+
+          for (int i = 0; i < Options.Length; i++)
+          {
+            writer.WriteStartElement(Options[i]);
+
+            writer.WriteElementString("Value", lValues[i]);
+
+            writer.WriteEndElement();
+          }
+
+          writer.WriteEndElement();
+          writer.WriteEndDocument();
+          writer.Close();
+        }
+      
     }
 
     static void Draw()
@@ -260,6 +362,7 @@ namespace Sneak_2._0
           break;
         case ' ':
           vMode = !vMode;
+          CreateOptions();
           break;
         case 'o':
           ChangeFPS();
@@ -314,7 +417,7 @@ namespace Sneak_2._0
         }
         else if (Head.X + x < MINX)
         {
-          lSnake.Add(new Snake(MAXX, Head.Y + y));
+          lSnake.Add(new Snake(MAXX-1, Head.Y + y));
         }
         else if (Head.Y + y > MAXY - 1)
         {
