@@ -24,7 +24,6 @@ On Skip mode True you can not queue any Input, after each frame the Inputstream 
 
 # ToDo
 - More Room Layouts.
-- Save Mode.
 - Scoreboard.
 
 # Known Issues
