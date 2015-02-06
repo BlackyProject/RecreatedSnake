@@ -5,6 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+/*
+ * Creator: SakuraJassen
+ * Version: V1.0
+ */
 
 namespace Sneak_2._0
 {
@@ -318,7 +322,7 @@ namespace Sneak_2._0
         }
         else if (Head.Y + y < MINY)
         {
-          lSnake.Add(new Snake(Head.X + x, MAXY));
+          lSnake.Add(new Snake(Head.X + x, MAXY-1));
         }
         else
         {
