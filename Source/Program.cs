@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Xml;
 /*
  * Creator: SakuraJassen
- * Version: V1.2
+ * Version: V1.3
  */
 
 namespace Sneak_2._0
@@ -56,7 +56,7 @@ namespace Sneak_2._0
 
     static int vLenght = 1;
     static int vSleeping = 0;
-    static int vWait = 200;
+    static int vWait = 100;
     static int vMaxOfSet = 1; 
 
     static long vDeltaTime = 0;
@@ -354,13 +354,16 @@ namespace Sneak_2._0
           ChangeDic(GetDir(cki.KeyChar));
           break;
         case 'p':
-          vDirection = vLastDirection;
-          vSeasonTime.Start();
           if (vDirection != eDirection.Standing)
           {
             vLastDirection = vDirection;
             vDirection = eDirection.Standing;
             vSeasonTime.Stop();
+          }
+          else
+          {
+            vDirection = vLastDirection;
+            vSeasonTime.Start();
           }
           break;
         case ' ':
