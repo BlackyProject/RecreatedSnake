@@ -7,10 +7,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 /*
- * Creator: SakuraJassen
- * Version: V1.3
- */
-
+* Creator: SakuraJassen
+* Version: V1.3
+*/
 namespace Sneak_2._0
 {
   class Snake
@@ -35,7 +34,6 @@ namespace Sneak_2._0
       Y = y;
     }
   }
-
   class Program
   {
     const int Default_SCORE = 1;
@@ -43,38 +41,27 @@ namespace Sneak_2._0
     const int Default_MAXX = 41;
     const int Default_MINY = 1;
     const int Default_MINX = 0;
-
     static int SCORE = Default_SCORE;
     static int MAXY = Default_MAXY;
     static int MAXX = Default_MAXX;
     static int MINY = Default_MINY;
     static int MINX = Default_MINX;
-
     static List<Snake> lSnake = new List<Snake>();
-
-    static Snak vFood = new Snak(20,20);
-
+    static Snak vFood = new Snak(20, 20);
     static int vLenght = 1;
     static int vSleeping = 0;
     static int vWait = 100;
-    static int vMaxOfSet = 1; 
-
+    static int vMaxOfSet = 1;
     static long vDeltaTime = 0;
-
     static bool vMode = false;
     static bool vLose = false;
     static bool vDebug = false;
-
     static eDirection vDirection = eDirection.Standing;
     static eDirection vLastDirection = eDirection.Standing;
-
     static Stopwatch vSeasonTime = new Stopwatch();
     static Stopwatch vGameTime = new Stopwatch();
-
     static Random vRan = new Random();
-
     static string vFPS = "";
-
     enum eDirection
     {
       Up,
@@ -83,7 +70,6 @@ namespace Sneak_2._0
       Right,
       Standing
     };
-
     static void Main(string[] args)
     {
       StartUp();
@@ -119,7 +105,6 @@ namespace Sneak_2._0
         Console.ReadKey();
       }
     }
-
     static void StartUp()
     {
       Console.CursorVisible = false;
@@ -128,13 +113,11 @@ namespace Sneak_2._0
       vFPS = Convert.ToString(1000 / vWait);
       vGameTime.Start();
     }
-
     static void ReadOption()
     {
       if (System.IO.File.Exists(@".\Options.xml"))
       {
         System.Xml.XmlTextReader reader = new System.Xml.XmlTextReader(@".\Options.xml");
-
         string vContents = "";
         while (reader.Read())
         {
@@ -188,67 +171,53 @@ namespace Sneak_2._0
     }
     static void CreateOptions()
     {
-        string[]     Options         = new string[7]{ "SCORE", "MAXY", "MAXX", "MINY", "MINX", "vWait", "vMode" };
-
-        int[]        OptionValueInt  = new int[6]{ SCORE, MAXY, MAXX, MINY, MINX, vWait };
-        Boolean[]    OptionValueBool = new Boolean[1]{ vMode };
-
-        List<string> lValues = new List<string>();
-
-        for (int i = 0; i < OptionValueInt.Length; i++)
+      string[] Options = new string[7] { "SCORE", "MAXY", "MAXX", "MINY", "MINX", "vWait", "vMode" };
+      int[] OptionValueInt = new int[6] { SCORE, MAXY, MAXX, MINY, MINX, vWait };
+      Boolean[] OptionValueBool = new Boolean[1] { vMode };
+      List<string> lValues = new List<string>();
+      for (int i = 0; i < OptionValueInt.Length; i++)
+      {
+        lValues.Add(OptionValueInt[i].ToString());
+      }
+      for (int i = 0; i < OptionValueBool.Length; i++)
+      {
+        lValues.Add(OptionValueBool[i].ToString());
+      }
+      using (XmlWriter writer = XmlWriter.Create(@".\Options.xml"))
+      {
+        writer.WriteStartDocument();
+        writer.WriteStartElement("Options");
+        for (int i = 0; i < Options.Length; i++)
         {
-          lValues.Add(OptionValueInt[i].ToString());
-        }
-        for (int i = 0; i < OptionValueBool.Length; i++)
-        {
-          lValues.Add(OptionValueBool[i].ToString());
-        }
-
-        using (XmlWriter writer = XmlWriter.Create(@".\Options.xml"))
-        {
-          writer.WriteStartDocument();
-          writer.WriteStartElement("Options");
-
-          for (int i = 0; i < Options.Length; i++)
-          {
-            writer.WriteStartElement(Options[i]);
-
-            writer.WriteElementString("Value", lValues[i]);
-
-            writer.WriteEndElement();
-          }
-
+          writer.WriteStartElement(Options[i]);
+          writer.WriteElementString("Value", lValues[i]);
           writer.WriteEndElement();
-          writer.WriteEndDocument();
-          writer.Close();
         }
-      
+        writer.WriteEndElement();
+        writer.WriteEndDocument();
+        writer.Close();
+      }
     }
-
     static void Draw()
     {
       char vChar = ' ';
-
       string vScore = (vLenght - vMaxOfSet).ToString().PadLeft(6, '0');
       string vTime = String.Format("{0:00}:{1:00}:{2:00}", vSeasonTime.Elapsed.Hours, vSeasonTime.Elapsed.Minutes, vSeasonTime.Elapsed.Seconds);
       string vModeString = vMode.ToString().PadRight(5);
-
       if (!vLose)
       {
         StringBuilder builder = new StringBuilder();
         Snake sanke = new Snake(0, 0);
-    
-        builder.Append(   "Score: "
-                        + vScore
-                        + " Skip: "
-                        + vModeString
-                        + " Time: "
-                        + vTime
-                        + " │" 
-                        + " FPS:" 
-                        + vFPS 
-                        + "\n");
-
+        builder.Append("Score: "
+        + vScore
+        + " Skip: "
+        + vModeString
+        + " Time: "
+        + vTime
+        + " │"
+        + " FPS:"
+        + vFPS
+        + "\n");
         for (int y = MINY; y < MAXY; y++)
         {
           for (int x = MINX; x < MAXX; x++)
@@ -285,14 +254,13 @@ namespace Sneak_2._0
       else
       {
         vSeasonTime.Stop();
-        Console.Write(  "\nScore: " 
-                      + vScore
-                      + " Time: "
-                      + vTime
-                      + "\nLeider Verloren :C"); 
+        Console.Write("\nScore: "
+        + vScore
+        + " Time: "
+        + vTime
+        + "\nGame Over! :C");
       }
     }
-
     static eDirection GetDir(char Dir)
     {
       switch (Dir)
@@ -308,7 +276,6 @@ namespace Sneak_2._0
       }
       return eDirection.Standing;
     }
-
     static void ChangeDic(eDirection Direction)
     {
       if (Direction == eDirection.Down && vDirection != eDirection.Up)
@@ -332,7 +299,6 @@ namespace Sneak_2._0
         return;
       }
     }
-
     static void ControlInput()
     {
       ConsoleKeyInfo cki = new ConsoleKeyInfo();
@@ -379,7 +345,6 @@ namespace Sneak_2._0
           break;
       }
     }
-
     static void Update()
     {
       int x;
@@ -410,9 +375,7 @@ namespace Sneak_2._0
             y = 0;
             break;
         }
-
-        lSnake.ForEach(delegate(Snake name){ name.life++; });
-
+        lSnake.ForEach(delegate(Snake name) { name.life++; });
         lSnake.RemoveAll(g => g.life >= vLenght);
         if (lSnake.Exists(g => g.X == Head.X + x && g.Y == Head.Y + y) && vDirection != eDirection.Standing)
         {
@@ -424,7 +387,7 @@ namespace Sneak_2._0
         }
         else if (Head.X + x < MINX)
         {
-          lSnake.Add(new Snake(MAXX-1, Head.Y + y));
+          lSnake.Add(new Snake(MAXX - 1, Head.Y + y));
         }
         else if (Head.Y + y > MAXY - 1)
         {
@@ -432,7 +395,7 @@ namespace Sneak_2._0
         }
         else if (Head.Y + y < MINY)
         {
-          lSnake.Add(new Snake(Head.X + x, MAXY-1));
+          lSnake.Add(new Snake(Head.X + x, MAXY - 1));
         }
         else
         {
@@ -445,23 +408,22 @@ namespace Sneak_2._0
           vFood.Y = vRan.Next(MINY + 5, MAXY - 3);
         }
       }
-
       vSleeping = Convert.ToInt32(vGameTime.ElapsedMilliseconds - vDeltaTime);
       int CoolDown = vWait - vSleeping;
       if (vDebug)
       {
         Console.WriteLine("\n"
-                          + CoolDown
-                          + " = " 
-                          + vWait 
-                          + " - " 
-                          + vSleeping
-                          + "\n"
-                          + vSleeping 
-                          + " = " 
-                          + vGameTime.ElapsedMilliseconds 
-                          + " - " 
-                          + vDeltaTime);
+        + CoolDown
+        + " = "
+        + vWait
+        + " - "
+        + vSleeping
+        + "\n"
+        + vSleeping
+        + " = "
+        + vGameTime.ElapsedMilliseconds
+        + " - "
+        + vDeltaTime);
       }
       try
       {
@@ -472,16 +434,12 @@ namespace Sneak_2._0
         Debug.WriteLine("Welp! Something went wronge here! " + e);
       }
     }
-
     static void ChangeFPS(string Text = "")
     {
       int output;
       int vWaitOld;
-
       bool err = true;
-
       vWaitOld = vWait;
-
       Console.Clear();
       if (Text != "")
       {
@@ -490,16 +448,13 @@ namespace Sneak_2._0
       Console.WriteLine("How many FPS:");
       vFPS = Console.ReadLine();
       err = int.TryParse(vFPS, out output);
-
       while (!err)
       {
         Console.WriteLine("Error!\nHow many FPS:");
         vFPS = Console.ReadLine();
         err = int.TryParse(vFPS, out output);
       }
-      
       vWait = 1000 / output;
-
       if (output > 120)
       {
         vWait = vWaitOld;
