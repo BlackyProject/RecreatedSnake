@@ -11,8 +11,7 @@ In the second variant, a sole player attempts to eat objects by running into the
 - W - Changes direction to North.
 - A - Changes direction to West.
 - S - Changes direction to South.
-- D -  Changes direction to East.
-
+- D - Changes direction to East.
 - P - Pause.
 - O - Changes FPS.
 - I - Toggle Debug Informations (May cause slowdowns).
