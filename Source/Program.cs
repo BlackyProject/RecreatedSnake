@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 using System.Xml;
 /*
  * Creator: SakuraJassen
- * Version: V1.5
+ * Version: V1.5.1
  */
 
-namespace Sneak_2._0
+namespace RecreatedSnake
 {
   class Snake
   {
@@ -289,7 +289,7 @@ namespace Sneak_2._0
                       + vScore
                       + " Time: "
                       + vTime
-                      + "\nLeider Verloren :C"); 
+                      + "\nGame Over! :C"); 
       }
     }
 
