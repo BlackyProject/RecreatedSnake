@@ -32,5 +32,4 @@ On Skip mode True you can not queue any Input, after each frame the Inputstream 
 - Scoreboard.
 
 # Known Issues
-- Sometimes Food-Points can Spawn on top the Snake.
 - occasionally the screen begins to flicker.
