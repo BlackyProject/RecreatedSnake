@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Xml;
 /*
  * Creator: SakuraJassen
- * Version: V1.5.1
+ * Version: V1.5.2
  */
 
 namespace RecreatedSnake
@@ -186,12 +186,19 @@ namespace RecreatedSnake
         CreateOptions();
       }
     }
-    static void CreateOptions()
+
+    static void CreateOptions(bool Default = false)
     {
         string[]     Options         = new string[7]{ "SCORE", "MAXY", "MAXX", "MINY", "MINX", "vWait", "vMode" };
 
-        int[]        OptionValueInt  = new int[6]{ SCORE, MAXY, MAXX, MINY, MINX, vWait };
-        Boolean[]    OptionValueBool = new Boolean[1]{ vMode };
+        int[] OptionValueInt = new int[6] { SCORE, MAXY, MAXX, MINY, MINX, vWait };
+        Boolean[] OptionValueBool = new Boolean[1] { vMode };
+        if (Default == true)
+        {
+          OptionValueInt = new int[6] { Default_SCORE, Default_MAXY, Default_MAXX, Default_MINY, Default_MINX, 100 };
+          OptionValueBool = new Boolean[1] { false };
+        }
+        
 
         List<string> lValues = new List<string>();
 
@@ -222,14 +229,14 @@ namespace RecreatedSnake
           writer.WriteEndDocument();
           writer.Close();
         }
-      
     }
 
     static void Draw()
     {
       char vChar = ' ';
 
-      string vScore = (vLenght - vMaxOfSet).ToString().PadLeft(6, '0');
+      string vScore = (lSnake.Count).ToString().PadLeft(6, '0');
+      string vScoreMax = (vLenght).ToString().PadLeft(6, '0');
       string vTime = String.Format("{0:00}:{1:00}:{2:00}", vSeasonTime.Elapsed.Hours, vSeasonTime.Elapsed.Minutes, vSeasonTime.Elapsed.Seconds);
       string vModeString = vMode.ToString().PadRight(5);
 
@@ -240,11 +247,12 @@ namespace RecreatedSnake
     
         builder.Append(   "Score: "
                         + vScore
+                        + " / "
+                        + vScoreMax
                         + " Skip: "
                         + vModeString
                         + " Time: "
                         + vTime
-                        + " │" 
                         + " FPS:" 
                         + vFPS 
                         + "\n");
@@ -376,6 +384,10 @@ namespace RecreatedSnake
           break;
         case 'i':
           vDebug = !vDebug;
+          break;
+        case 'k':
+          CreateOptions(true);
+          Environment.Exit(0);
           break;
       }
     }
