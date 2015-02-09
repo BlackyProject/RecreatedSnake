@@ -1,0 +1,29 @@
+# 1.1
+- 1# ADDED Basic Option File support!
+- 2# BUG_FIXED Head did not spawn at the right location if you go off screen on the left.
+ 
+Link: https://github.com/BlackyProject/RecreatedSnake/commit/3e85df7251fdd334d57797a123286a521e59cf8d
+ 
+# 1.2
+- *ADDED It can now remember with which FPS setting you last played!
+- *FIXED Annoying bug where you have to Input the FPS number a second time.
+ 
+Link: https://github.com/BlackyProject/RecreatedSnake/commit/a116521356583aa3cdee4610f7888fcd888d6e85
+ 
+#1.3
+- *FIXED That the Time was still running while the Game was Paused
+- *CHANGED That the Starting FPS is now 10 not 5.
+
+Link: https://github.com/BlackyProject/RecreatedSnake/commit/a116521356583aa3cdee4610f7888fcd888d6e85
+
+#1.4
+- *FIXED Game Over Screen isn't German anymore!
+
+Link: https://github.com/BlackyProject/RecreatedSnake/commit/c0f833e8cc487444c0665934c93742d59f876675
+
+#1.5.*
+- *FIXED That sometimes Food-Points can Spawn on top the Snake.
+- *FIXED Game Over Screen being German again...
+- *CHANGED Namespace to RecreatedSnake.
+- *ADDED You can now Press "k" to regenerate the default config file.
+- *ADDED The Score now counts up.
