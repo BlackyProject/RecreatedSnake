@@ -29,7 +29,6 @@ On Skip mode True you can not queue any Input, after each frame the Inputstream 
 # ToDo
 - More Room Layouts.
 - Scoreboard.
-- Create a Versions History File.
 
 # Known Issues
 - occasionally the screen begins to flicker.
