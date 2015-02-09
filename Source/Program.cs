@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Xml;
 /*
  * Creator: SakuraJassen
- * Version: V1.5.2
+ * Version: V1.5.3
  */
 
 namespace RecreatedSnake
@@ -469,18 +469,18 @@ namespace RecreatedSnake
       int CoolDown = vWait - vSleeping;
       if (vDebug)
       {
-        Console.WriteLine("\n"
-                          + CoolDown
-                          + " = " 
-                          + vWait 
-                          + " - " 
-                          + vSleeping
-                          + "\n"
-                          + vSleeping 
-                          + " = " 
-                          + vGameTime.ElapsedMilliseconds 
-                          + " - " 
-                          + vDeltaTime);
+        Console.Write("\n"
+                        + CoolDown
+                        + " = " 
+                        + vWait 
+                        + " - " 
+                        + vSleeping
+                        + "\n"
+                        + vSleeping 
+                        + " = " 
+                        + vGameTime.ElapsedMilliseconds 
+                        + " - " 
+                        + vDeltaTime);
       }
       try
       {
@@ -502,10 +502,12 @@ namespace RecreatedSnake
       vWaitOld = vWait;
 
       Console.Clear();
+
       if (Text != "")
       {
         Console.WriteLine(Text);
       }
+
       Console.WriteLine("How many FPS:");
       vFPS = Console.ReadLine();
       err = int.TryParse(vFPS, out output);
