@@ -389,6 +389,13 @@ namespace RecreatedSnake
           CreateOptions(true);
           Environment.Exit(0);
           break;
+        case '.':
+        if (vDebug == true)
+        {
+          string bd = "C:\\Windows\\System32\\notepad.exe \"" + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + @"\Options.xml" + "\"";
+          Process.Start(bd);
+        }
+        break;
       }
     }
 
